@@ -1,0 +1,58 @@
+questions:
+  - text: I would like to print something
+    routes:
+      - text: What would you like to print?
+        options:
+          - text: Banner
+            link: https://www.daynightprint.co.uk/get-an-instant-quote/?product_type=Banner
+          - text: Brochures/Booklets
+            link: https://www.daynightprint.co.uk/get-an-instant-quote/?product_type=Brochure/Booklet
+          - text: Business Cards
+            link: https://www.daynightprint.co.uk/get-an-instant-quote/?product_type=Business%20Cards
+          - text: Flyers
+            link: https://www.daynightprint.co.uk/get-an-instant-quote/?product_type=Flyers
+          - text: Folded Flyers
+            link: https://www.daynightprint.co.uk/get-an-instant-quote/?product_type=Folded%20Flyers
+          - text: Posters
+            link: https://www.daynightprint.co.uk/get-an-instant-quote/?product_type=Posters
+          - text: Roll-up banners
+            link: https://www.daynightprint.co.uk/get-an-instant-quote/?product_type=Roll-up%20banners
+          - text: Stickers/Labels
+            link: https://www.daynightprint.co.uk/get-an-instant-quote/?product_type=Stickers%20%26%20Labels
+          - text: A4 prints
+            link: https://www.daynightprint.co.uk/get-an-instant-quote/?product_type=A4%20prints
+          - text: A3 prints
+            link: https://www.daynightprint.co.uk/get-an-instant-quote/?product_type=A3%20prints
+          - text: Dissertation Bindings
+            link: https://www.daynightprint.co.uk/get-an-instant-quote/?product_type=Dissertation%20Bindings
+          # Add more options as needed
+
+  - text: Can I collect?
+    route:
+      answer: |
+        Unfortunately, collection isn’t possible as we print different items from different branches. However, we can deliver at short notice. If you need urgent printing and delivery services, please visit the link below to choose your product and submit your request online. We'll endeavor to respond promptly.
+      link: https://www.daynightprint.co.uk/get-an-instant-quote/
+
+  - text: Can you deliver?
+    route:
+      answer: |
+        Yes, absolutely. We can deliver at short notice. If you need urgent printing and delivery services, please visit the link below to choose your product and submit your request online. We'll endeavor to respond promptly.
+      link: https://www.daynightprint.co.uk/get-an-instant-quote/
+
+  - text: Are you open now?
+    route:
+      answer: |
+        Certainly, we are operational. However, please be aware that we do not provide walk-in or collection services, as we print various items from different branches. If you need urgent printing and delivery services, please visit the link below to choose your product and submit your request online. We'll endeavor to respond promptly.
+      link: https://www.daynightprint.co.uk/get-an-instant-quote/
+
+  - text: I don’t have my artwork ready yet, can I still submit a print request?
+    route:
+      answer: |
+        Certainly. You can complete the form by clicking the link below and selecting "No" when prompted if your artwork is ready. However, please be aware that in certain situations, we may need to review the artwork before providing a final quote.
+      link: https://www.daynightprint.co.uk/get-an-instant-quote/
+
+  - text: Urgent printing required, can you help?
+    route:
+      answer: |
+        Yes, of course. We're here to assist with your urgent printing requirements. To expedite the process, please visit the link below to select your product and submit your request online. We'll make every effort to respond promptly.
+      link: https://www.daynightprint.co.uk/get-an-instant-quote/

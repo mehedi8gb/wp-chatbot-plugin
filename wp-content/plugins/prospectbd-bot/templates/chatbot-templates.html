@@ -1,0 +1,122 @@
+<div id="chatbotApp" class="chatbot-container fixed bottom-0 right-0 z-50">
+    <div class="chatbot-icon fixed bottom-4 right-4 z-50" @click="toggleChatbot">
+        <!-- You can use any icon for the chatbot here -->
+        <i class="fa fa-comment text-black fa-3x"></i>
+    </div>
+    <div
+         v-show="isChatbotOpen"
+    >
+        <div id="app" class="max-w-lg mx-auto mt-8 chatbot-frame bg-white rounded-lg shadow-md overflow-hidden fixed bottom-20 right-4 z-50 w-80 h-96">
+            <div class="chatbot-frame bg-white rounded-lg shadow-md overflow-hidden">
+         <div class="max-w-md w-full mx-auto border rounded-lg overflow-hidden">
+    <!-- Chat Messages Start -->
+    <div class="max-h-80 overflow-y-auto">
+        <!-- Chat Message 1 -->
+        <div class="flex flex-row items-end justify-start mb-2">
+            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 mr-2"></div>
+            <div class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
+                <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+        <!-- Chat Message 2 -->
+        <div class="flex flex-row items-end justify-end mb-2">
+            <div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
+                <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+            </div>
+            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 ml-2"></div>
+        </div>        <!-- Chat Message 2 -->
+        <div class="flex flex-row items-end justify-end mb-2">
+            <div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
+                <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+            </div>
+            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 ml-2"></div>
+        </div>        <!-- Chat Message 2 -->
+        <div class="flex flex-row items-end justify-end mb-2">
+            <div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
+                <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+            </div>
+            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 ml-2"></div>
+        </div>        <!-- Chat Message 2 -->
+        <div class="flex flex-row items-end justify-end mb-2">
+            <div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
+                <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+            </div>
+            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 ml-2"></div>
+        </div>
+        <!-- More Chat Messages... -->
+    </div>
+    <!-- Chat Messages End -->
+
+    <!-- Input Box Start -->
+    <div class="bg-gray-300 p-4">
+        <input class="flex items-center h-10 w-full rounded px-3 text-sm" type="text" placeholder="Type your message…">
+    </div>
+    <!-- Input Box End -->
+</div>
+
+                <!--        <template v-if="!selectedQuestion">-->
+                <!--          <div-->
+                <!--            v-for="(question, index) in questions"-->
+                <!--            :key="index"-->
+                <!--            class="chat-message"-->
+                <!--          >-->
+                <!--            <button-->
+                <!--              @click="selectQuestion(question)"-->
+                <!--              class="w-full text-left text-gray-700 px-4 py-3 border-b hover:bg-gray-50"-->
+                <!--            >-->
+                <!--              {{ question.text }}-->
+                <!--            </button>-->
+                <!--          </div>-->
+                <!--        </template>-->
+
+                <!--        <template v-else>-->
+                <!--          <div class="chat-message p-4" v-if="!selectedQuestion.route">-->
+                <!--            {{ selectedQuestion.text }}-->
+                <!--          </div>-->
+
+                <!--          <template v-if="selectedQuestion.route">-->
+                <!--            <p class="p-4">{{ selectedQuestion.route.answer }}</p>-->
+                <!--            <p v-if="selectedQuestion.route.link" class="p-4">-->
+                <!--              <a-->
+                <!--                :href="selectedQuestion.route.link"-->
+                <!--                target="_blank"-->
+                <!--                class="text-blue-500 hover:underline"-->
+                <!--                >Click here for more info</a-->
+                <!--              >-->
+                <!--            </p>-->
+                <!--          </template>-->
+
+                <!--          <template v-else>-->
+                <!--            <template v-if="selectedQuestion.route">-->
+                <!--              <p class="p-4">{{ selectedQuestion.route.answer }}</p>-->
+                <!--              <p v-if="selectedQuestion.route.link" class="p-4">-->
+                <!--                <a-->
+                <!--                  :href="selectedQuestion.route.link"-->
+                <!--                  target="_blank"-->
+                <!--                  class="text-blue-500 hover:underline"-->
+                <!--                  >Click here for more info</a-->
+                <!--                >-->
+                <!--              </p>-->
+                <!--            </template>-->
+                <!--            <template v-else>-->
+                <!--              <div-->
+                <!--                v-for="(option, index) in selectedQuestion.routes[0].options"-->
+                <!--                :key="index"-->
+                <!--                class="chat-message"-->
+                <!--              >-->
+                <!--                <button-->
+                <!--                  @click="handleOptionClick(option)"-->
+                <!--                  class="w-full text-left text-gray-700 px-4 py-3 border-b hover:bg-gray-50"-->
+                <!--                >-->
+                <!--                  {{ option.text }}-->
+                <!--                </button>-->
+                <!--              </div>-->
+                <!--            </template>-->
+                <!--          </template>-->
+                <!--        </template>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
