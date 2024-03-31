@@ -6,7 +6,8 @@ Version: 1.0.0
 Author: Mehedi Hasan
 */
 
-function my_chatbot_enqueue_scripts() {
+function my_chatbot_enqueue_scripts(): void
+{
     wp_enqueue_style('tailwind-css', 'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css');
     wp_enqueue_style('my-chatbot-css', plugins_url('assets/css/style.css', __FILE__));
     wp_enqueue_script('vue', 'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js', array(), null, false);
@@ -14,6 +15,15 @@ function my_chatbot_enqueue_scripts() {
     wp_enqueue_script('jsyaml', 'https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js', array(), null, false);
     wp_enqueue_script('my-chatbot-vue', plugins_url('assets/js/vue.js', __FILE__), array('vue'), null, true);
 }
+// Add type="module" attribute to the script tag
+function add_module_attribute_to_vue_script($tag, $handle) {
+    if ('my-chatbot-vue' === $handle) {
+        $tag = str_replace('<script', '<script type="module"', $tag);
+    }
+    return $tag;
+}
+add_filter('script_loader_tag', 'add_module_attribute_to_vue_script', 10, 2);
+
 add_action('wp_enqueue_scripts', 'my_chatbot_enqueue_scripts');
 
 // Render chatbot

@@ -14,6 +14,10 @@
                          alt="Chatbot Icon" class="h-10 w-10 mr-2">
                     <img src="https://www.daynightprint.co.uk/wp-content/uploads/2019/03/daynight-logo.png"
                          alt="Service Logo" class="h-5 w-auto">
+                    <button
+                            @click="resetSessionQuestions"
+                            class="absolute top-0 right-0 p-4">reset
+                    </button>
                 </div>
                 <div class="flex flex-col flex-1 overflow-y-auto">
                     <!-- Chat Message block system -->
@@ -24,7 +28,7 @@
                         </div>
 
                         <div class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
-                            <template v-if="!selectedQuestion">
+                            <template>
                                 <div
                                         v-for="(question, index) in questions"
                                         :key="index"
@@ -38,61 +42,108 @@
                                     </button>
                                 </div>
                             </template>
+                        </div>
+                    </div>
 
-                            <template v-else>
-                                <div class="chat-message p-4" v-if="!selectedQuestion.route">
-                                    {{ selectedQuestion.text }}
-                                </div>
+                    <!-- Chat Message block user-->
 
-                                <template v-if="selectedQuestion.route">
-                                    <p class="p-4">{{ selectedQuestion.route.answer }}</p>
-                                    <p v-if="selectedQuestion.route.link" class="p-4">
-                                        <a
-                                                href="selectedQuestion.route.link"
-                                                target="_blank"
-                                                class="text-blue-500 hover:underline"
-                                        >Click here for more info</a
-                                        >
-                                    </p>
-                                </template>
-
-                                <template v-else>
-                                    <template v-if="selectedQuestion.route">
-                                        <p class="p-4">{{ selectedQuestion.route.answer }}</p>
-                                        <p v-if="selectedQuestion.route.link" class="p-4">
-                                            <a
-                                                    :href="selectedQuestion.route.link"
-                                                    target="_blank"
-                                                    class="text-blue-500 hover:underline"
-                                            >Click here for more info</a
-                                            >
-                                        </p>
-                                    </template>
-                                    <template v-else>
-                                        <div
-                                                v-for="(option, index) in selectedQuestion.routes[0].options"
-                                                :key="index"
-                                                class="chat-message"
-                                        >
-                                            <button
-                                                    @click="handleOptionClick(option)"
-                                                    class="w-full text-left text-gray-700 px-4 py-3 border-b hover:bg-gray-50"
-                                            >
+                    <template v-for="(question, index) in sessionQuestions">
+                        <div class="flex flex-row items-end justify-end my-2">
+                            <!-- User side -->
+                            <div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
+                                <div class="text-sm">{{ question }}</div>
+                            </div>
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 ml-2"></div>
+                        </div>
+                        <div class="flex flex-row items-start justify-start my-2">
+                            <!-- System side -->
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 mr-2 relative">
+                                <img src="https://staging.backoffice2.daynightprint.co.uk/resource/image/dnp-icon.png"
+                                     alt="Icon" class="h-full w-full object-cover rounded-full">
+                            </div>
+                            <div class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
+                                <template v-if="sessionAnswers[index]">
+                                    <template v-if="sessionAnswers[index].options">
+                                        <div v-for="(option, i) in sessionAnswers[index].options" :key="i"
+                                             class="chat-message">
+                                            <button @click="handleOptionClick(option)"
+                                                    class="w-full text-left text-gray-700 px-4 py-3 border-b hover:bg-gray-50">
                                                 {{ option.text }}
                                             </button>
                                         </div>
                                     </template>
-                                </template>
-                            </template>
-                        </div>
-                    </div>
 
-                    <div class="flex flex-row items-end justify-end mb-2">
-                        <div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-                            <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    <template v-else="sessionAnswers[index].answer">
+                                        <div class="chat-message p-4">{{ sessionAnswers[index].answer }}</div>
+                                    </template>
+                                    <template v-if="sessionAnswers[index].link">
+                                        <div class="chat-message p-4">
+                                            <a
+                                                    :href="sessionAnswers[index].link"
+                                                    target="_blank"
+                                                    class="text-blue-500 hover:underline"
+                                            >Click here for more info</a>
+                                        </div>
+                                    </template>
+                                </template>
+                            </div>
                         </div>
-                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 ml-2"></div>
-                    </div>
+                    </template>
+
+
+                    <!--                    <div class="flex flex-row items-end justify-end mb-2">-->
+                    <!--                        <template>-->
+                    <!--                            <div v-for="(question, index) in sessionQuestions" :key="index" class="chat-message">-->
+                    <!--                                <div v-for="(question, index) in sessionQuestions" :key="index"-->
+                    <!--                                     class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">-->
+                    <!--                                    <p class="text-sm">{{question}}</p>-->
+                    <!--                                </div>-->
+                    <!--                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300 ml-2"></div>-->
+                    <!--                            </div>-->
+
+                    <!--                                <template v-if="selectedQuestion.route">-->
+                    <!--                                    <p class="p-4">{{ selectedQuestion.route.answer }}</p>-->
+                    <!--                                    <p v-if="selectedQuestion.route.link" class="p-4">-->
+                    <!--                                        <a-->
+                    <!--                                                href="selectedQuestion.route.link"-->
+                    <!--                                                target="_blank"-->
+                    <!--                                                class="text-blue-500 hover:underline"-->
+                    <!--                                        >Click here for more info</a-->
+                    <!--                                        >-->
+                    <!--                                    </p>-->
+                    <!--                                </template>-->
+
+                    <!--                                <template v-else>-->
+                    <!--                                    <template v-if="selectedQuestion.route">-->
+                    <!--                                        <p class="p-4">{{ selectedQuestion.route.answer }}</p>-->
+                    <!--                                        <p v-if="selectedQuestion.route.link" class="p-4">-->
+                    <!--                                            <a-->
+                    <!--                                                    :href="selectedQuestion.route.link"-->
+                    <!--                                                    target="_blank"-->
+                    <!--                                                    class="text-blue-500 hover:underline"-->
+                    <!--                                            >Click here for more info</a-->
+                    <!--                                            >-->
+                    <!--                                        </p>-->
+                    <!--                                    </template>-->
+                    <!--                                    <template v-else>-->
+                    <!--                                        <div-->
+                    <!--                                                v-for="(option, index) in selectedQuestion.routes[0].options"-->
+                    <!--                                                :key="index"-->
+                    <!--                                                class="chat-message"-->
+                    <!--                                        >-->
+                    <!--                                            <button-->
+                    <!--                                                    @click="handleOptionClick(option)"-->
+                    <!--                                                    class="w-full text-left text-gray-700 px-4 py-3 border-b hover:bg-gray-50"-->
+                    <!--                                            >-->
+                    <!--                                                {{ option.text }}-->
+                    <!--                                            </button>-->
+                    <!--                                        </div>-->
+                    <!--                                    </template>-->
+                    <!--                                </template>-->
+
+
+                    <!--                        </template>-->
+                    <!--                    </div>-->
                     <!-- More Chat Messages... -->
                 </div>
                 <!-- Chat Messages End -->
