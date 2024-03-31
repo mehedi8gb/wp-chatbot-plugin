@@ -41,6 +41,22 @@
     <inspection_tool class="GrUnnecessaryPublicModifier" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="GrUnnecessarySealedModifier" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="GrUnnecessarySemicolon" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="7">
+            <item index="0" class="java.lang.String" itemvalue="v-show" />
+            <item index="1" class="java.lang.String" itemvalue="@click" />
+            <item index="2" class="java.lang.String" itemvalue="v-for" />
+            <item index="3" class="java.lang.String" itemvalue="v-if" />
+            <item index="4" class="java.lang.String" itemvalue=":key" />
+            <item index="5" class="java.lang.String" itemvalue="v-else" />
+            <item index="6" class="java.lang.String" itemvalue=":href" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
     <inspection_tool class="IfStatementMissingBreakInLoop" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="InspectionUsingGrayColors" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="IntegerMultiplicationImplicitCastToLong" enabled="false" level="WARNING" enabled_by_default="false">
