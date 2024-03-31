@@ -15,19 +15,24 @@ function my_chatbot_enqueue_scripts(): void
     wp_enqueue_script('jsyaml', 'https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js', array(), null, false);
     wp_enqueue_script('my-chatbot-vue', plugins_url('assets/js/vue.js', __FILE__), array('vue'), null, true);
 }
-// Add type="module" attribute to the script tag
-function add_module_attribute_to_vue_script($tag, $handle) {
+
+
+function add_module_attribute_to_vue_script($tag, $handle)
+{
     if ('my-chatbot-vue' === $handle) {
         $tag = str_replace('<script', '<script type="module"', $tag);
     }
     return $tag;
 }
+
 add_filter('script_loader_tag', 'add_module_attribute_to_vue_script', 10, 2);
 
 add_action('wp_enqueue_scripts', 'my_chatbot_enqueue_scripts');
 
 // Render chatbot
-function my_plugin_add_html_to_home_page() {
+function my_plugin_add_html_to_home_page()
+{
     echo file_get_contents(plugin_dir_path(__FILE__) . 'templates/chatbot-templates.html');
 }
+
 add_action('wp_footer', 'my_plugin_add_html_to_home_page');

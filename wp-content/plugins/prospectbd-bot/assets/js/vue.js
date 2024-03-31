@@ -5,6 +5,7 @@ let chatbotApp = new Vue({
         sessionQuestions: [],
         sessionAnswers: [],
         selectedQuestion: null,
+        selectedQuestions: [], // Initialize an array to store selected questions
         isChatbotOpen: false,
 
     },
@@ -36,19 +37,27 @@ let chatbotApp = new Vue({
                     console.error("Error loading questions:", error);
                 });
         },
-        storeQuestions(question) {
+        storeQuestions(question, index) {
             // Retrieving sessionQuestions from localStorage
             const storedSessionQuestions = JSON.parse(localStorage.getItem('sessionQuestions')) || [];
 
-            // Adding the new question to the sessionQuestions array
-            this.sessionQuestions = [...storedSessionQuestions, question.text];
+            if (!question.questions) {
+                // Adding the new question to the sessionQuestions array
+                this.sessionQuestions = [...storedSessionQuestions, question.question];
 
+
+                this.loadAnswerForQuestion(question);
+            } else {
+                this.selectedQuestion = question.questions[index];
+                this.$nextTick(() => {
+                    this.scrollToElement(this.$refs.bottom);
+                });
+                // Adding the new question to the sessionQuestions array
+                this.sessionQuestions = [...storedSessionQuestions, question.questions[index].question];
+                this.loadAnswerForQuestion(question.questions[index]);
+            }
             // Saving updated sessionQuestions to localStorage
             localStorage.setItem('sessionQuestions', JSON.stringify(this.sessionQuestions));
-
-            // Logging sessionQuestions for debugging (optional)
-            console.log('sessionQuestions:', this.sessionQuestions);
-            this.loadAnswerForQuestion(question);
         },
         resetSessionQuestions() {
             this.sessionQuestions = [];
@@ -61,35 +70,41 @@ let chatbotApp = new Vue({
             const parsedQuestions = this.questions;
 
             // Find the question in the YAML file
-            const foundQuestion = parsedQuestions.find(q => q.text === question.text);
+            const foundQuestion = parsedQuestions.find(q => q.question === question.question);
             console.log('foundQuestion:', foundQuestion);
             // If the question is found, get its answer
-            if (foundQuestion && foundQuestion.route && foundQuestion.route.answer) {
-                let answer = foundQuestion.route;
-
-                // Perform any necessary checks using all selected questions
-                const selectedQuestions = this.sessionQuestions;
-                // Example check: If the user has selected a specific question, modify the answer
-                if (selectedQuestions.includes('Specific Question')) {
-                    answer = 'Modified answer for specific question';
-                }
-
-                this.currentAnswer = answer;
-            } else if (foundQuestion && foundQuestion.routes) {
-                this.currentAnswer = foundQuestion.routes[0];
-                console.log(this.currentAnswer);
+            if (foundQuestion) {
+                this.currentAnswer = foundQuestion.route;
             }
-
             this.sessionAnswers = [...this.sessionAnswers, this.currentAnswer];
             localStorage.setItem('sessionAnswers', JSON.stringify(this.sessionAnswers));
-            console.log('sessionAnswers:', this.sessionAnswers);
+        },
+        // Function to add a selected question to the tree structure
+        addSelectedQuestion(questionText, route) {
+            // Create a new object representing the selected question and its route
+            const selectedQuestion = {
+                text: questionText,
+                route: route
+            };
+
+            // Add the selected question to the array
+            this.selectedQuestions.push(selectedQuestion);
+        },
+        roleUp() {
+            // this.addSelectedQuestion(questionText, route);
+        },
+        scrollToElement(element) {
+            element.scrollIntoView({behavior: 'smooth', block: 'end'});
         },
         toggleChatbot() {
             this.isChatbotOpen = !this.isChatbotOpen;
         },
-        selectQuestion(question) {
-            this.storeQuestions(question);
+        selectQuestion(question, index = 0) {
+            this.storeQuestions(question, index);
             this.selectedQuestion = question;
+            this.$nextTick(() => {
+                this.scrollToElement(this.$refs.bottom);
+            });
         },
         selectOption(option) {
             console.log(option);
@@ -97,12 +112,11 @@ let chatbotApp = new Vue({
                 this.selectedQuestion = option;
             }
         },
-        handleOptionClick(option) {
-            if (option.link) {
+        handleOptionClick(option, index) {
+            if (option.link && !option.questions) {
                 window.open(option.link, "_blank");
-            } else {
-                // Handle other actions if needed
-                console.log("Option clicked:", option.text);
+            } else if (option.questions) {
+                this.selectQuestion(option.questions, index);
             }
         },
     },
